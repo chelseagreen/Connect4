@@ -1,0 +1,60 @@
+.title {
+  color: black;
+  font-family: Times;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.player-turn {
+  font-size: 15px;
+}
+
+.player-one {
+  color: red;
+}
+
+.player-two {
+  color: yellow;
+}
+
+.page {
+  position: absolute;
+  margin-left: 30px;
+}
+
+.game-canvas {
+  width: 700px;
+  height: 500px;
+  background: blue;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+}
+
+.playerOneSelected {
+  background: red;
+}
+
+.playerTwoSelected {
+  background: yellow;
+}
+
+.reset-button {
+  background: black;
+  width: 100px;
+  height: 30px;
+  margin: 5px;
+}
