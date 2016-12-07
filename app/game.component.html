@@ -1,63 +1,63 @@
 <div class="page">
   <div class="title">Connect 4</div>
-  <div *ngIf="state == playerOneTurnState" class="title player-turn player-one">Player Red's Turn</div>
-  <div *ngIf="state == playerTwoTurnState" class="title player-turn player-two">Player Yellow's Turn</div>
-  <div *ngIf="state == playerOneWinnerState" class="title player-one">Red Wins!!</div>
-  <div *ngIf="state == playerTwoWinnerState" class="title player-two">Yellow Wins!!</div>
+  <div *ngIf="stateService.state == stateService.playerOneTurnState" class="title player-turn player-one">Player Red's Turn</div>
+  <div *ngIf="stateService.state == stateService.playerTwoTurnState" class="title player-turn player-two">Player Yellow's Turn</div>
+  <div *ngIf="stateService.state == stateService.playerOneWinnerState" class="title player-one">Red Wins!!</div>
+  <div *ngIf="stateService.state == stateService.playerTwoWinnerState" class="title player-two">Yellow Wins!!</div>
   <div class="game-canvas">
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(0)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(1)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(2)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(3)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(4)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(5)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:5']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:5']" (click)="checkIfRowCanBePlayedAndSelectTile(6)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,5']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,5']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,5']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,5']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,5']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,5']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,5']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,5']" (click)="updateBoard(6)"></button>
     </div>
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(0)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(1)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(2)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(3)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(4)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(5)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:4']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:4']" (click)="checkIfRowCanBePlayedAndSelectTile(6)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,4']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,4']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,4']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,4']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,4']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,4']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,4']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,4']" (click)="updateBoard(6)"></button>
     </div>
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(0)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(1)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(2)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(3)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(4)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(5)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:3']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:3']" (click)="checkIfRowCanBePlayedAndSelectTile(6)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,3']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,3']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,3']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,3']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,3']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,3']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,3']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,3']" (click)="updateBoard(6)"></button>
     </div>
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(0)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(1)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(2)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(3)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(4)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(5)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:2']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:2']" (click)="checkIfRowCanBePlayedAndSelectTile(6)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,2']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,2']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,2']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,2']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,2']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,2']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,2']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,2']" (click)="updateBoard(6)"></button>
     </div>
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(0)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(1)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(2)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(3)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(4)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile(5)"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:1']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:1']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,1']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,1']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,1']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,1']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,1']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,1']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,1']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,1']" (click)="updateBoard(6)"></button>
     </div>
     <div class="row">
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:0,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:0,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:1,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:1,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:2,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:2,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:3,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:3,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:4,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:4,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:5,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:5,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
-      <button class="tile" [class.playerTwoSelected]="tileSelectedByPlayerTwo['x:6,y:0']" [class.playerOneSelected]="tileSelectedByPlayerOne['x:6,y:0']" (click)="checkIfRowCanBePlayedAndSelectTile()"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['0,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['0,0']" (click)="updateBoard(0)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['1,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['1,0']" (click)="updateBoard(1)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['2,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['2,0']" (click)="updateBoard(2)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['3,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['3,0']" (click)="updateBoard(3)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['4,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['4,0']" (click)="updateBoard(4)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['5,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['5,0']" (click)="updateBoard(5)"></button>
+      <button class="tile" [class.playerTwoSelected]="stateService.tileSelectedByPlayerTwo['6,0']" [class.playerOneSelected]="stateService.tileSelectedByPlayerOne['6,0']" (click)="updateBoard(6)"></button>
     </div>
   </div>
   <div class="title">

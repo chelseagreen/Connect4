@@ -42,6 +42,7 @@
   height: 60px;
   background: white;
   border-radius: 50%;
+  outline: none;
 }
 
 .playerOneSelected {
