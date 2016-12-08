@@ -21,7 +21,7 @@ export class StateService {
   tileSelectedByPlayerOne: Map<string, boolean> = new Map<string, boolean>();
   tileSelectedByPlayerTwo: Map<string, boolean> = new Map<string, boolean>();
 
-  winnerService: WinnerService = new WinnerService;
+  private winnerService: WinnerService = new WinnerService;
 
   constructor() {
     this.playerOneTurnState = new PlayerOneTurnState(this, this.winnerService);
@@ -31,18 +31,14 @@ export class StateService {
     this.state = this.playerOneTurnState;
   }
 
-  checkIfRowCanBePlayedAndSelectTile(xSelected: number): void {
+  selectPlayer1Tile(x: number, y: number): void {
+    this.playerOneSelectedTiles.push([x, y]);
+    this.tileSelectedByPlayerOne[String([x,y])] = !this.tileSelectedByPlayerOne[String([x,y])];
+  }
 
-    let tilesValuesPopulatingSelectedColumn = this.playerOneSelectedTiles.concat(this.playerTwoSelectedTiles).filter((tile: any) => {
-      return tile[0] === xSelected;
-    });
-
-    if (!tilesValuesPopulatingSelectedColumn) {
-      this.state.playTile(xSelected, 0);
-    }
-    if (tilesValuesPopulatingSelectedColumn.length < 6) {
-      this.state.playTile(xSelected, tilesValuesPopulatingSelectedColumn.length);
-    }
+  selectPlayer2Tile(x: number, y: number): void {
+    this.playerTwoSelectedTiles.push([x, y]);
+    this.tileSelectedByPlayerTwo[String([x,y])] = !this.tileSelectedByPlayerTwo[String([x,y])];
   }
 
   setState(state: State): void {
