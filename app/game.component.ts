@@ -28,7 +28,7 @@ export class GameComponent {
   updateBoard(xValue: number): void {
     this.stateService.state.checkIfRowCanBePlayedAndSelectTile(xValue);
 
-    this.tileSelectedByPlayerOne = this.stateService.tileSelectedByPlayerOne;
-    this.tileSelectedByPlayerTwo = this.stateService.tileSelectedByPlayerTwo;
+    this.tileSelectedByPlayerOne = this.stateService.tileService.tileSelectedByPlayerOne;
+    this.tileSelectedByPlayerTwo = this.stateService.tileService.tileSelectedByPlayerTwo;
   }
 }

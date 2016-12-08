@@ -5,6 +5,7 @@ import {PlayerTwoTurnState} from "./playerStates"
 import {PlayerOneWinnerState} from "./playerStates"
 import {PlayerTwoWinnerState} from "./playerStates"
 import {State} from "./playerStates"
+import {TileService} from "./tile.service"
 
 @Injectable()
 export class StateService {
@@ -15,30 +16,15 @@ export class StateService {
   playerTwoWinnerState: State;
   state: State;
 
-  playerOneSelectedTiles: any = [];
-  playerTwoSelectedTiles: any = [];
-
-  tileSelectedByPlayerOne: Map<string, boolean> = new Map<string, boolean>();
-  tileSelectedByPlayerTwo: Map<string, boolean> = new Map<string, boolean>();
-
   private winnerService: WinnerService = new WinnerService;
+  private tileService: TileService = new TileService;
 
   constructor() {
-    this.playerOneTurnState = new PlayerOneTurnState(this, this.winnerService);
+    this.playerOneTurnState = new PlayerOneTurnState(this, this.winnerService, this.tileService);
     this.playerOneWinnerState = new PlayerOneWinnerState(this);
-    this.playerTwoTurnState = new PlayerTwoTurnState(this, this.winnerService);
+    this.playerTwoTurnState = new PlayerTwoTurnState(this, this.winnerService, this.tileService);
     this.playerTwoWinnerState = new PlayerTwoWinnerState(this);
     this.state = this.playerOneTurnState;
-  }
-
-  selectPlayer1Tile(x: number, y: number): void {
-    this.playerOneSelectedTiles.push([x, y]);
-    this.tileSelectedByPlayerOne[String([x,y])] = !this.tileSelectedByPlayerOne[String([x,y])];
-  }
-
-  selectPlayer2Tile(x: number, y: number): void {
-    this.playerTwoSelectedTiles.push([x, y]);
-    this.tileSelectedByPlayerTwo[String([x,y])] = !this.tileSelectedByPlayerTwo[String([x,y])];
   }
 
   setState(state: State): void {

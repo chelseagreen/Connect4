@@ -1,10 +1,13 @@
 import {WinnerService} from "./winner.service"
 import {StateService} from "./state.service";
+import {TileService} from "./tile.service";
 
 export interface State {
+
+  stateText: string;
+
   playTile(x: number, y: number): void;
   checkIfRowCanBePlayedAndSelectTile(xSelected: number): void;
-  stateText: string;
 }
 
 export class PlayerOneTurnState implements State {
@@ -13,15 +16,17 @@ export class PlayerOneTurnState implements State {
 
   private stateService: StateService;
   private winnerService: WinnerService;
+  tileService: TileService;
 
-  constructor(stateService: StateService, winnerService: WinnerService) {
+  constructor(stateService: StateService, winnerService: WinnerService, tileService: TileService) {
     this.winnerService = winnerService;
     this.stateService = stateService;
+    this.tileService = tileService;
   }
 
   checkIfRowCanBePlayedAndSelectTile(xSelected: number): void {
 
-    let tilesValuesPopulatingSelectedColumn = this.stateService.playerOneSelectedTiles.concat(this.stateService.playerTwoSelectedTiles).filter((tile: any) => {
+    let tilesValuesPopulatingSelectedColumn = this.tileService.playerOneSelectedTiles.concat(this.tileService.playerTwoSelectedTiles).filter((tile: any) => {
       return tile[0] === xSelected;
     });
 
@@ -34,8 +39,8 @@ export class PlayerOneTurnState implements State {
   }
 
   playTile(x: number, y: number): void {
-    this.stateService.selectPlayer1Tile(x ,y);
-    this.winnerService.checkForWinningTiles(this.stateService.playerOneSelectedTiles);
+    this.tileService.selectPlayer1Tile(x,y);
+    this.winnerService.checkForWinningTiles(this.tileService.playerOneSelectedTiles);
 
     (this.winnerService.isWinner)
       ? this.stateService.setState(this.stateService.getPlayerOneWinnerState())
@@ -47,17 +52,19 @@ export class PlayerTwoTurnState implements State {
 
   stateText = "Player Yellow Turn";
 
-  private winnerService: WinnerService;
   private stateService: StateService;
+  private winnerService: WinnerService;
+  tileService: TileService;
 
-  constructor(stateService: StateService, winnerService: WinnerService) {
+  constructor(stateService: StateService, winnerService: WinnerService, tileService: TileService) {
     this.winnerService = winnerService;
     this.stateService = stateService;
+    this.tileService = tileService;
   }
 
   checkIfRowCanBePlayedAndSelectTile(xSelected: number): void {
 
-    let tilesValuesPopulatingSelectedColumn = this.stateService.playerOneSelectedTiles.concat(this.stateService.playerTwoSelectedTiles).filter((tile: any) => {
+    let tilesValuesPopulatingSelectedColumn = this.tileService.playerOneSelectedTiles.concat(this.tileService.playerTwoSelectedTiles).filter((tile: any) => {
       return tile[0] === xSelected;
     });
 
@@ -70,8 +77,8 @@ export class PlayerTwoTurnState implements State {
   }
 
   playTile(x: number, y: number): void {
-    this.stateService.selectPlayer2Tile(x, y);
-    this.winnerService.checkForWinningTiles(this.stateService.playerTwoSelectedTiles);
+    this.tileService.selectPlayer2Tile(x,y);
+    this.winnerService.checkForWinningTiles(this.tileService.playerTwoSelectedTiles);
 
     (this.winnerService.isWinner)
       ? this.stateService.setState(this.stateService.getPlayerTwoWinnerState())
