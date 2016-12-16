@@ -16,14 +16,16 @@ export class StateService {
   playerTwoWinnerState: State;
   state: State;
 
-  private winnerService: WinnerService = new WinnerService;
-  private tileService: TileService = new TileService;
-
-  constructor() {
+  constructor(private tileService: TileService, private winnerService: WinnerService) {
     this.playerOneTurnState = new PlayerOneTurnState(this, this.winnerService, this.tileService);
-    this.playerOneWinnerState = new PlayerOneWinnerState(this);
+    this.playerOneWinnerState = new PlayerOneWinnerState();
     this.playerTwoTurnState = new PlayerTwoTurnState(this, this.winnerService, this.tileService);
-    this.playerTwoWinnerState = new PlayerTwoWinnerState(this);
+    this.playerTwoWinnerState = new PlayerTwoWinnerState();
+    this.state = this.playerOneTurnState;
+  }
+
+  resetGame(): void {
+    this.tileService.resetGame();
     this.state = this.playerOneTurnState;
   }
 
@@ -45,5 +47,13 @@ export class StateService {
 
   getPlayerTwoWinnerState(): State {
     return this.playerTwoWinnerState;
+  }
+
+  getTileSelectedByPlayerOne(): any {
+    return this.tileService.playerOneSelectedTiles;
+  }
+
+  getTileSelectedByPlayerTwo(): any {
+    return this.tileService.playerTwoSelectedTiles;
   }
 }

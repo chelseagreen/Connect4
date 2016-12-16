@@ -10,22 +10,25 @@ export class WinnerService {
     this.sortFilledCellsByCoordinate(currentPlayerTiles, 1,0);
   }
 
-  sortFilledCellsByCoordinate(currentPlayer: any, axis1: number, axis2: number): void {
+  private sortFilledCellsByCoordinate(currentPlayer: any, coordOne: number, coordTwo: number): void {
 
     let filledCellCoordinates: any = [
-      {coordinateValue: 0, oppositeCoordinateValues: []},
-      {coordinateValue: 1, oppositeCoordinateValues: []},
-      {coordinateValue: 2, oppositeCoordinateValues: []},
-      {coordinateValue: 3, oppositeCoordinateValues: []},
-      {coordinateValue: 4, oppositeCoordinateValues: []},
-      {coordinateValue: 5, oppositeCoordinateValues: []},
-      {coordinateValue: 6, oppositeCoordinateValues: []},
+      {value: 0, oppositeValues: []},
+      {value: 1, oppositeValues: []},
+      {value: 2, oppositeValues: []},
+      {value: 3, oppositeValues: []},
+      {value: 4, oppositeValues: []},
+      {value: 5, oppositeValues: []},
+      {value: 6, oppositeValues: []},
     ];
 
     currentPlayer.forEach((tile: any) => {
       for (let a = 0; a < filledCellCoordinates.length; a++) {
-        if (filledCellCoordinates[a].coordinateValue === tile[axis1]) {
-          filledCellCoordinates[a].oppositeCoordinateValues.push(tile[axis2]);
+
+        let currentCoordinate = filledCellCoordinates[a];
+
+        if (this.tileBelongsInRow(currentCoordinate.value, tile[coordOne])) {
+          this.addTileToRow(currentCoordinate, tile[coordTwo]);
         }
       }
     });
@@ -34,51 +37,78 @@ export class WinnerService {
     this.countForDiagonalWinner(filledCellCoordinates);
   }
 
-  private countForRowWinner(filledCellCoordinates: any) {
+  private addTileToRow(currentCoordinate: any, tileCoord: number): void {
+    currentCoordinate.oppositeValues.push(tileCoord);
+  }
+
+  private tileBelongsInRow(tile1: any, tile2: any): boolean {
+    return tile1 === tile2;
+  }
+
+  private countForRowWinner(filledCellCoordinates: any): void {
     filledCellCoordinates.forEach((coordinate: any) => {
-      coordinate.oppositeCoordinateValues.sort((a: any, b: any) => {
+      coordinate.oppositeValues.sort((a: any, b: any) => {
         return a - b;
       });
+
       let countOfFilledCellsOnCurrentCoordinate: number = 1;
 
-      for (let i = 0; i < coordinate.oppositeCoordinateValues.length-1; i++) {
-        if (coordinate.oppositeCoordinateValues[i] + 1 == coordinate.oppositeCoordinateValues[i + 1]) {
+      for (let i = 0; i < coordinate.oppositeValues.length-1; i++) {
+
+        if (this.consecutiveTiles(coordinate.oppositeValues[i], coordinate.oppositeValues[i + 1])) {
           countOfFilledCellsOnCurrentCoordinate++
         }
-        if (countOfFilledCellsOnCurrentCoordinate === 4) {
+        if (this.fourTilesInARow(countOfFilledCellsOnCurrentCoordinate)) {
           this.isWinner = true;
           return;
         }
-        if (coordinate.oppositeCoordinateValues[i] + 1 !== coordinate.oppositeCoordinateValues[i + 1]) {
+        if (this.nonConsecutiveTiles(coordinate.oppositeValues[i], coordinate.oppositeValues[i + 1])) {
           countOfFilledCellsOnCurrentCoordinate = 1;
         }
       }
     });
   }
 
-  countForDiagonalWinner(coordinateList: any) {
+  private nonConsecutiveTiles(coordinate: any, coordinate2: any): boolean {
+    return coordinate + 1 !== coordinate2;
+  }
+
+  private fourTilesInARow(countOfFilledCellsOnCurrentCoordinate: number): boolean {
+    return countOfFilledCellsOnCurrentCoordinate === 4;
+  }
+
+  private consecutiveTiles(coordinate: any, coordinate2: any): boolean {
+    return coordinate + 1 === coordinate2;
+  }
+
+  private countForDiagonalWinner(coordinateList: any): void {
+    
     for (let i=0; i<coordinateList.length-3; i++) {
-      let currentCoordList = coordinateList[i].oppositeCoordinateValues;
-      let secondCoordList = coordinateList[i+1].oppositeCoordinateValues;
-      let thirdCoordList = coordinateList[i+2].oppositeCoordinateValues;
-      let fourthCoordList = coordinateList[i+3].oppositeCoordinateValues;
+      let currentCoordList = coordinateList[i].oppositeValues;
+      let secondCoordList = coordinateList[i+1].oppositeValues;
+      let thirdCoordList = coordinateList[i+2].oppositeValues;
+      let fourthCoordList = coordinateList[i+3].oppositeValues;
 
       for (let a=0; a<currentCoordList.length; a++) {
 
-        if (secondCoordList.indexOf(currentCoordList[a] + 1) !== -1
-          && thirdCoordList.indexOf(currentCoordList[a] + 2) !== -1
-          && fourthCoordList.indexOf(currentCoordList[a] + 3) !== -1) {
+        if (this.coordIsFilled(secondCoordList, currentCoordList[a] + 1)
+          && this.coordIsFilled(thirdCoordList, currentCoordList[a] + 2)
+          && this.coordIsFilled(fourthCoordList, currentCoordList[a] + 3)) {
           this.isWinner = true;
           return;
         }
 
-        if (secondCoordList.indexOf(currentCoordList[a] - 1) !== -1
-          && thirdCoordList.indexOf(currentCoordList[a] - 2) !== -1
-          && fourthCoordList.indexOf(currentCoordList[a] - 3) !== -1) {
+        if (this.coordIsFilled(secondCoordList, currentCoordList[a] - 1)
+          && this.coordIsFilled(thirdCoordList, currentCoordList[a] - 2)
+          && this.coordIsFilled(fourthCoordList, currentCoordList[a] - 3)) {
           this.isWinner = true;
           return;
         }
       }
     }
+  }
+
+  private coordIsFilled(coordList: any, coord: any) {
+    return coordList.indexOf(coord) !== -1;
   }
 }

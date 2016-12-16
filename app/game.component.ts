@@ -15,20 +15,26 @@ export class GameComponent {
   private tileSelectedByPlayerOne: Map<string, boolean> = new Map<string, boolean>();
   private tileSelectedByPlayerTwo: Map<string, boolean> = new Map<string, boolean>();
 
-  constructor(stateService: StateService = new StateService) {
+  constructor(stateService: StateService) {
     this.stateService = stateService;
   }
 
   resetGame(): void {
-    this.stateService = new StateService;
-    this.tileSelectedByPlayerOne = new Map<string, boolean>();
-    this.tileSelectedByPlayerTwo = new Map<string, boolean>();
+    this.stateService.resetGame();
   }
 
   updateBoard(xValue: number): void {
-    this.stateService.state.checkIfRowCanBePlayedAndSelectTile(xValue);
+    this.stateService.state.checkIfTileCanBePlayed(xValue);
 
-    this.tileSelectedByPlayerOne = this.stateService.tileService.tileSelectedByPlayerOne;
-    this.tileSelectedByPlayerTwo = this.stateService.tileService.tileSelectedByPlayerTwo;
+    this.tileSelectedByPlayerOne = new Map<string, boolean>();
+    this.tileSelectedByPlayerTwo = new Map<string, boolean>();
+
+    this.stateService.getTileSelectedByPlayerOne().forEach((tile: any) => {
+      this.tileSelectedByPlayerOne[String(tile)] = !this.tileSelectedByPlayerOne[String(tile)];
+    });
+
+    this.stateService.getTileSelectedByPlayerTwo().forEach((tile: any) => {
+      this.tileSelectedByPlayerTwo[String(tile)] = !this.tileSelectedByPlayerTwo[String(tile)];
+    });
   }
 }

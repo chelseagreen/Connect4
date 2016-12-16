@@ -12,11 +12,11 @@
 }
 
 .player-one {
-  color: red;
+  background: red;
 }
 
 .player-two {
-  color: yellow;
+  background: yellow;
 }
 
 .page {

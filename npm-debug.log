@@ -9,8 +9,8 @@
 6 silly lifecycle angular-quickstart@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle angular-quickstart@1.0.0~start: angular-quickstart@1.0.0
 8 verbose lifecycle angular-quickstart@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle angular-quickstart@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/chelseagreen/Desktop/connect4/quickstart/node_modules/.bin:/usr/local/Cellar/node/6.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-10 verbose lifecycle angular-quickstart@1.0.0~start: CWD: /Users/chelseagreen/Desktop/connect4/quickstart
+9 verbose lifecycle angular-quickstart@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/chelseagreen/Desktop/GreaterSum/connect4/quickstart/node_modules/.bin:/usr/local/Cellar/node/6.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle angular-quickstart@1.0.0~start: CWD: /Users/chelseagreen/Desktop/GreaterSum/connect4/quickstart
 11 silly lifecycle angular-quickstart@1.0.0~start: Args: [ '-c', 'tsc && concurrently "tsc -w" "lite-server" ' ]
 12 silly lifecycle angular-quickstart@1.0.0~start: Returned: code: 2  signal: null
 13 info lifecycle angular-quickstart@1.0.0~start: Failed to exec start script
@@ -25,7 +25,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:852:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid angular-quickstart@1.0.0
-16 verbose cwd /Users/chelseagreen/Desktop/connect4/quickstart
+16 verbose cwd /Users/chelseagreen/Desktop/GreaterSum/connect4/quickstart
 17 error Darwin 16.1.0
 18 error argv "/usr/local/Cellar/node/6.3.1/bin/node" "/usr/local/bin/npm" "start"
 19 error node v6.3.1
