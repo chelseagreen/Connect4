@@ -1,6 +1,7 @@
-import { GameComponent } from './game.component';
 import { async, TestBed } from "@angular/core/testing";
 import { HttpModule } from "@angular/http";
+
+import { GameComponent } from './game.component';
 import {TileService} from "./tile.service";
 import {StateService} from "./state.service";
 import {WinnerService} from "./winner.service";
@@ -16,20 +17,20 @@ describe("connect 4", () => {
 
   it("should initialize in player one turn state", () => {
     let connect4 = new GameComponent(new StateService(new TileService(), new WinnerService()));
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneTurnState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneTurnState());
   });
 
   it("should change state when player one plays a tile", () => {
     let connect4 = new GameComponent(new StateService(new TileService(), new WinnerService()));
     connect4.updateBoard(1);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerTwoTurnState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerTwoTurnState());
   });
 
   it("should switch player states back and forth", () => {
     let connect4 = new GameComponent(new StateService(new TileService(), new WinnerService()));
     connect4.updateBoard(1);
     connect4.updateBoard(1);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneTurnState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneTurnState());
   });
 
   it("should add to both player selected tile lists", () => {
@@ -56,7 +57,7 @@ describe("connect 4", () => {
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
     connect4.updateBoard(3);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneWinnerState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneWinnerState());
   });
 
   it('should show player one isWinner by consecutive x vals, equal y vals', () => {
@@ -65,7 +66,7 @@ describe("connect 4", () => {
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
     connect4.updateBoard(5);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneWinnerState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneWinnerState());
   });
 
   it('should not show isWinner if filled cells are filled with different player values', () => {
@@ -75,7 +76,7 @@ describe("connect 4", () => {
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
     connect4.updateBoard(3);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerTwoTurnState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerTwoTurnState());
   });
 
   it('should let player 2 win if 4 y values in a row', () => {
@@ -84,9 +85,9 @@ describe("connect 4", () => {
     tileService.playerTwoSelectedTiles = [[2,0], [2,1], [2,2]];
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
-    connect4.stateService.state = connect4.stateService.playerTwoTurnState;
+    connect4.stateService.state = connect4.stateService.getPlayerTwoTurnState();
     connect4.updateBoard(2);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerTwoWinnerState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerTwoWinnerState());
   });
 
   it('should show a diagonal upward isWinner', () => {
@@ -96,7 +97,7 @@ describe("connect 4", () => {
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
     connect4.updateBoard(3);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneWinnerState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneWinnerState());
   });
 
   it('should not show a diagonal when not four in a row', () => {
@@ -105,9 +106,9 @@ describe("connect 4", () => {
     tileService.playerTwoSelectedTiles = [[6,1], [5,0], [4,0], [4,2]];
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
-    connect4.stateService.state = connect4.stateService.playerTwoTurnState;
+    connect4.stateService.state = connect4.stateService.getPlayerTwoTurnState();
     connect4.updateBoard(3);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneTurnState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneTurnState());
   });
 
   it('should show a diagonal downward isWinner', () => {
@@ -117,6 +118,6 @@ describe("connect 4", () => {
     let stateService: StateService = new StateService(tileService, new WinnerService());
     let connect4 = new GameComponent(stateService);
     connect4.updateBoard(2);
-    expect(connect4.stateService.state).toEqual(connect4.stateService.playerOneWinnerState);
+    expect(connect4.stateService.state).toEqual(connect4.stateService.getPlayerOneWinnerState());
   });
 });

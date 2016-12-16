@@ -10,10 +10,10 @@ import {TileService} from "./tile.service"
 @Injectable()
 export class StateService {
 
-  playerOneTurnState: State;
-  playerTwoTurnState: State;
-  playerOneWinnerState: State;
-  playerTwoWinnerState: State;
+  private playerOneTurnState: State;
+  private playerTwoTurnState: State;
+  private playerOneWinnerState: State;
+  private playerTwoWinnerState: State;
   state: State;
 
   constructor(private tileService: TileService, private winnerService: WinnerService) {

@@ -82,7 +82,7 @@ export class WinnerService {
   }
 
   private countForDiagonalWinner(coordinateList: any): void {
-    
+
     for (let i=0; i<coordinateList.length-3; i++) {
       let currentCoordList = coordinateList[i].oppositeValues;
       let secondCoordList = coordinateList[i+1].oppositeValues;
