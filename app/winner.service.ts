@@ -4,8 +4,10 @@ import { Injectable } from "@angular/core";
 export class WinnerService {
 
   isWinner: boolean = false;
+  playerTurns: number = 0;
 
   checkForWinningTiles(currentPlayerTiles: any) {
+    this.playerTurns++;
     this.sortFilledCellsByCoordinate(currentPlayerTiles, 0,1);
     this.sortFilledCellsByCoordinate(currentPlayerTiles, 1,0);
   }
@@ -110,5 +112,10 @@ export class WinnerService {
 
   private coordIsFilled(coordList: any, coord: any) {
     return coordList.indexOf(coord) !== -1;
+  }
+
+  resetGame(): void {
+    this.isWinner = false;
+    this.playerTurns = 0;
   }
 }

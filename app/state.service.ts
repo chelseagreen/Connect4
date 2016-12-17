@@ -4,6 +4,7 @@ import {PlayerOneTurnState} from "./playerStates"
 import {PlayerTwoTurnState} from "./playerStates"
 import {PlayerOneWinnerState} from "./playerStates"
 import {PlayerTwoWinnerState} from "./playerStates"
+import {PlayerTieState} from "./playerStates"
 import {State} from "./playerStates"
 import {TileService} from "./tile.service"
 
@@ -14,6 +15,7 @@ export class StateService {
   private playerTwoTurnState: State;
   private playerOneWinnerState: State;
   private playerTwoWinnerState: State;
+  private playerTieState: State;
   state: State;
 
   constructor(private tileService: TileService, private winnerService: WinnerService) {
@@ -21,11 +23,13 @@ export class StateService {
     this.playerOneWinnerState = new PlayerOneWinnerState();
     this.playerTwoTurnState = new PlayerTwoTurnState(this, this.winnerService, this.tileService);
     this.playerTwoWinnerState = new PlayerTwoWinnerState();
+    this.playerTieState = new PlayerTieState();
     this.state = this.playerOneTurnState;
   }
 
   resetGame(): void {
     this.tileService.resetGame();
+    this.winnerService.resetGame();
     this.state = this.playerOneTurnState;
   }
 
@@ -47,6 +51,10 @@ export class StateService {
 
   getPlayerTwoWinnerState(): State {
     return this.playerTwoWinnerState;
+  }
+
+  getPlayerTieState(): State {
+    return this.playerTieState;
   }
 
   getTileSelectedByPlayerOne(): any {

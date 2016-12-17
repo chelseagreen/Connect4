@@ -13,7 +13,7 @@ export class GameComponent {
   stateService: StateService;
   columnOfTiles: any = new Array(7);
   rows: any = Array.apply(0, Array(6)).map((element: any, index: any) => {return 5 - index;});
-  
+
   private tileSelectedByPlayerOne: Map<string, boolean> = new Map<string, boolean>();
   private tileSelectedByPlayerTwo: Map<string, boolean> = new Map<string, boolean>();
 
@@ -23,7 +23,6 @@ export class GameComponent {
 
   resetGame(): void {
     this.stateService.resetGame();
-
     this.tileSelectedByPlayerOne = new Map<string, boolean>();
     this.tileSelectedByPlayerTwo = new Map<string, boolean>();
   }

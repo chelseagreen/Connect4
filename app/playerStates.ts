@@ -43,9 +43,15 @@ export class PlayerOneTurnState extends PlayerTurnState {
     this.tileService.selectPlayer1Tile(x,y);
     this.winnerService.checkForWinningTiles(this.tileService.playerOneSelectedTiles);
 
-    (this.winnerService.isWinner)
-      ? this.stateService.setState(this.stateService.getPlayerOneWinnerState())
-      : this.stateService.setState(this.stateService.getPlayerTwoTurnState());
+    if (this.winnerService.isWinner) {
+      this.stateService.setState(this.stateService.getPlayerOneWinnerState());
+    }
+    else if (this.winnerService.playerTurns === 42) {
+      this.stateService.setState(this.stateService.getPlayerTieState());
+    }
+    else {
+      this.stateService.setState(this.stateService.getPlayerTwoTurnState());
+    }
   }
 }
 
@@ -55,12 +61,18 @@ export class PlayerTwoTurnState extends PlayerTurnState {
   stateClass = "player-turn player-two";
 
   protected playTile(x: number, y: number): void {
-    this.tileService.selectPlayer2Tile(x,y);
+    this.tileService.selectPlayer2Tile(x, y);
     this.winnerService.checkForWinningTiles(this.tileService.playerTwoSelectedTiles);
 
-    (this.winnerService.isWinner)
-      ? this.stateService.setState(this.stateService.getPlayerTwoWinnerState())
-      : this.stateService.setState(this.stateService.getPlayerOneTurnState());
+    if (this.winnerService.isWinner) {
+      this.stateService.setState(this.stateService.getPlayerTwoWinnerState());
+    }
+    else if (this.winnerService.playerTurns === 42) {
+      this.stateService.setState(this.stateService.getPlayerTieState());
+    }
+    else {
+      this.stateService.setState(this.stateService.getPlayerOneTurnState());
+    }
   }
 }
 
@@ -77,6 +89,15 @@ export class PlayerTwoWinnerState implements State {
 
   stateText = "Player Yellow Wins!";
   stateClass = "player-two";
+
+  checkIfTileCanBePlayed(xSelected: number): void {}
+
+}
+
+export class PlayerTieState implements State {
+
+  stateText = "Tie Game!!!!";
+  stateClass = "";
 
   checkIfTileCanBePlayed(xSelected: number): void {}
 
